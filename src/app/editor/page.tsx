@@ -3,8 +3,6 @@ import React from "react";
 
 export default function Editor() {
   return (
-    <>
-      {/* <EditorComponent /> */}
-    </>
+    <>{process.env.NODE_ENV === "production" ? null : <EditorComponent />}</>
   );
 }
