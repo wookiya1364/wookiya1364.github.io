@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-color: #ffffff;
+  --border-color: #cccccc;
+  --font-color: #6c6c6c;
+  --reverse-font-color: #000000;
+  --content-color: rgb(102, 102, 102);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-color: #000000;
+    --border-color: #575d5d;
+    --font-color: #ffffff9c;
+    --reverse-font-color: #ffffff;
+    --content-color: rgb(179, 179, 179);
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background-color: var(--background-color);
+}
+.header {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease; /* 부드러운 애니메이션 효과 */
+}
+.header.show {
+  transform: translateY(0);
+}
+
+.sidebar {
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  /* transform: translateX(-100%); */
+  /* transition: transform 0.3s ease-in-out; */
+}
+
+.sidebar-open {
+  /* transform: translateX(0); */
+}
+
+article > div > p {
+  color: var(--content-color);
+}
+
+/* .fr-element.fr-view > p {
+  font-size: 16px;
+} */
+ul {
+  display: block;
+}
+
+* {
+  border-color: var(--border-color);
+}
+
+img {
+  background-color: white;
+}
+
+svg {
+  background-color: white;
+}
+
+.content-color {
+  color: var(--font-color);
+}
+
+.field-container {
+  margin: 0;
+  padding: 5px 15px 10px 15px;
+  border-radius: 10px;
+  border: 1px solid hsl(0, 0%, 70%);
+}
+
+.field-button {
+  display: inline-flex;
+  padding: 10px;
+  border-radius: 100%;
+  color: hsl(0, 0%, 40%);
+  border: 1px solid hsl(0, 0%, 90%);
+}
+
+.field-fill-color {
+  fill: var(--reverse-font-color);
+  background-color: transparent;
+}
+
+.scroll-down {
+  transform: translateY(-100%);
+}
