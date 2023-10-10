@@ -24,7 +24,7 @@ export async function generateMetadata(
   return {
     title: post.title,
     description: post.description,
-    metadataBase: new URL(process.env.BLOG_HOST?.toString()!),
+    // metadataBase: new URL(process.env.BLOG_HOST?.toString()!),
     icons: [post.thumbnail],
     openGraph: {
       images: [post.thumbnail],
