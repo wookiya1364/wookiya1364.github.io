@@ -11,7 +11,19 @@ export const blogs = [
     마크다운도 가능은 하지만, 이번에는 다루지 않습니다.
     만약 마크다운으로 작성하시려면 추가적인 학습을 하셔야 합니다.
     `,
-    src: [`/posts/2023/10/next13.png`, "/posts/2023/10/next13_2.png"],
+    src: [
+      `/posts/2023/10/next13.png`,
+      "/posts/2023/10/next13_2.png",
+      "/posts/2023/10/week_1/git1.png",
+      "/posts/2023/10/week_1/git4.png",
+      "/posts/2023/10/week_1/git2.png",
+      "/posts/2023/10/week_1/git3.png",
+      "/posts/2023/10/week_1/git5.png",
+      "/posts/2023/10/week_1/git6.png",
+      "/posts/2023/10/week_1/git7.png",
+      "/posts/2023/10/week_1/git8.gif",
+      "/posts/2023/10/week_1/blog.png",
+    ],
     thumbnail: "/image/2023/10/06/Nextjs-logo.png",
     create: "2023년 10월 05일",
   },

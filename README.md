@@ -1,3 +1,5 @@
+
+
 # Github blog Private으로 하려면 유료버전을 이용해야 합니다.
 
 # Commit Messages Style
@@ -11,3 +13,8 @@
 |test|테스트 코드 추가|
 |perf|성능 개선|
 |design|디자인 변경|
+
+
+
+### mov convert to gif
+ffmpeg -i input.mov -r 10 -loop 0 output.gif

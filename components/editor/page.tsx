@@ -54,7 +54,8 @@ export default function EditorComponent() {
     const doc = parser.parseFromString(copyedPost, "text/html");
     const imgList = doc.querySelectorAll("img");
     imgList.forEach((img, idx) => {
-      img.src = `${location.origin}/${content?.src[idx]!}`;
+      // img.src = `${location.origin}/${content?.src[idx]!}`;
+      img.src = `https://wookiya1364.github.io${content?.src[idx]!}`;
     });
 
     setCopy(doc.body.innerHTML);
@@ -64,8 +65,11 @@ export default function EditorComponent() {
   useEffect(() => {
     const content = blogs.find((blog) => blog.id === blogId);
     document.querySelectorAll("img").forEach((img, idx) => {
-      img.src = `${location.origin}/${content?.src[idx]!}`;
+      // img.src = `${location.origin}/${content?.src[idx]!}`;
+      img.src = `https://wookiya1364.github.io${content?.src[idx]!}`;
     });
+
+
     localStorage.getItem("saveHTML")
       ? setModel(localStorage.getItem("saveHTML")!)
       : null;
