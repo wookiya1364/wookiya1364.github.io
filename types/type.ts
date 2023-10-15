@@ -27,11 +27,11 @@ type TID = {
 };
 type TBlog = {
   id: string | number;
+  seq: string | number;
   title: string;
   content: string;
   description?: string;
   summary: string;
-  src: string[];
   thumbnail: string;
   create: string;
 };

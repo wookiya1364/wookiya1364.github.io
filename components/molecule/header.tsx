@@ -78,7 +78,7 @@ export default function Header() {
       >
         <Row>
           <Link href={"/"} className="font-bold text-[2rem]">
-            우기
+            {"우기's Journal"}
           </Link>
         </Row>
         <Row className="my-0 mr-0 ml-auto justify-around hidden lg:flex">

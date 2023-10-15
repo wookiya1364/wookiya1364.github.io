@@ -1,0 +1,138 @@
+## 이번 포스팅에서는 Next.js 13으로 Github Blog를 만드는 방법에 대해 알아보겠습니다.
+
+깃허브 블로그 만들기 시리즈는 총 3부작으로 구성되며,<br>
+1부에서는 Next.js 13 설치, 깃허브 저장소 생성과 설정에 대해 다룹니다.<br><br>
+
+<br>
+<br>
+<br>
+
+## 들어가기에 앞서...
+
+Next.js는 React based 프레임워크 입니다.<br>
+이는 많은 Frontend 개발자들이 사용하는 React로 복잡하고 다양한 기능들을 간편하게 사용할 수 있도록 만들어 놓았습니다.<br>
+구현하기 번거로운 SEO, SSR, SSG들을 손쉽게 구현할 수 있도록 하며 많은 인기를 누리고 있습니다.<br>
+이러한 Next.js 13은 Next.js의 최신버전으로, Page router에서 App router로 변경되며 사용을 적극권장하고 있습니다.<br>
+자세한 내용은 [Next.js 13 공식문서](https://nextjs.org/docs)를 읽으시길 바랍니다.
+
+<br>
+<br>
+
+|1부 목차|설명|
+|---|---|
+|[Next.js 13 install](#nextjs-13-install)|Next.js 13 설치|
+|[Github Repository Create](#github-repository-create)|깃허브 저장소 생성|
+|[Github Repository Settings](#github-repository-settings)|깃허브 저장소 설정|
+
+<br>
+<br>
+<br>
+
+## Next.js 13 install
+
+[Next.js 13 설치하기](https://nextjs.org/docs/getting-started/installation)<br>
+<br>
+
+아래의 명령어를 입력하시면 다음과 같은 프롬프트가 나옵니다.
+```jsx showLineNumbers
+npx create-next-app@
+```
+<br>
+
+아래의 프롬프트는 Next.js 13의 설정에 관한 것입니다. <br>
+원하시는 설정을 하시고 난 후, 엔터를 끝까지 입력하시면 Next.js 13 프로젝트가 만들어집니다.
+
+```jsx showLineNumbers
+What is your project named? my-app                                                             (원하는 프로젝트명)
+Would you like to use TypeScript? No / Yes                                                    (필자는 타입스크립트 사용)
+Would you like to use ESLint? No / Yes                                                           (필자는 ESLint 사용)
+Would you like to use Tailwind CSS? No / Yes                                                 (필자는 Tailwind CSS 사용)
+Would you like to use `src/` directory? No / Yes                                            (필자는 src 디렉토리 사용 사용)
+Would you like to use App Router? (recommended) No / Yes                         (필자는 App router 사용)
+Would you like to customize the default import alias? No / Yes            (필자는 tsconfig에서 추가)
+What import alias would you like configured?                                         (필자는 tsconfig에서 추가)
+```
+
+<br>
+<br>
+<br>
+
+## Github Repository Create
+
+
+
+다음으로 깃허브 저장소를 만들 차례입니다.<br>
+하단 그림에서 보이는 <span style="color:white; background-color:green;">New</span>를 클릭합니다.
+![git1](https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/adc29a2b-e78e-4eec-bdcc-4803a156a02b)
+
+<br>
+<br>
+
+우리는 깃허브 블로그를 만들어야 하므로, 깃허브에서 정해진 규칙대로 저장소를 생성해야 합니다.<br>
+규칙은 아이디.github.io 입니다.  Ex) 아이디: apple 일 경우, 저장소 이름: apple.github.io<br>
+아래의 사진을 보며 동일하게 설정을 하시면 됩니다.<br>
+주의할 점으로 public과 private의 차이는 유료사용자인지 아닌지로 나뉩니다.<br>
+만약, 무료사용자일 경우 깃허브 블로그는 <span style="color:white; background-color:black;">public</span>으로 생성해야 합니다.<br>
+
+![git4](https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/996b4980-e0ee-4c50-9878-ad1329887053)
+
+<br>
+<br>
+
+위와같이 저장소가 생성되었다면, 아래의 사진과 같이 두 개의 선택지가 나옵니다.<br>
+새 저장소를 만들거나 기존 저장소에 푸시하는 방법입니다.<br>
+![git2](https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/f4688f34-d7ba-4856-bd97-481b61ca0f3b)
+
+<br>
+<br>
+
+본인에게 적합한 방법으로 푸시가 끝나면 아래와 같이 푸시가 완료되었다는 메세지가 나옵니다.
+
+![git3](https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/dd5aeadb-93a0-42f1-afd7-19369776e71d)
+
+
+<br>
+<br>
+<br>
+
+## Github Repository Settings
+
+푸시가 완료되면 저장소에 설정을 변경해야 합니다.<br>
+우선, 저장소의 Settings를 클릭합니다.<br>
+Default branch는 main에서 바꾸지 않습니다. (이는 추후에 설명합니다.)<br>
+![git5](https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/6a31dedd-25b2-44f4-b871-fe43fbe14b42)
+
+<br>
+<br>
+
+Settings에 들어온 후, 좌측 메뉴판에 Code and automation의 하위 메뉴인 Pages를 클릭합니다.
+![git6](https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/eff6bf47-9f53-4ca3-b3e7-d7c4cccddd2f)
+<br>
+<br>
+
+다음으로 Build and deployment의 Source를 클릭한 후 Github Actions로 변경합니다.<br>
+
+![git7](https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/945717b7-8486-4b67-bfdd-67dc71bd4081)
+
+<br>
+<br>
+
+이후의 동작은 gif와 같이 Next.js configure를 클릭한 후, github action workflow를 생성합니다.<br>
+
+![git8](https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/06134194-41b8-48ec-b596-1da5acc8c99c)
+
+
+이제부터는 github main 브랜치에 커밋할 때마다, github action에서 build됩니다.<br>
+github action workflow에서 브랜치를 지정해주지 않았기 때문입니다.<br>
+만약 Default branch를 main에서 다른걸로 변경하셨다면 커밋할 때마다 적용되지 않으므로,<br>
+github action workflow에서도 마찬가지로 변경을 해주셔야 합니다.
+
+<br>
+<br>
+<br>
+
+## 마치면서
+
+오늘의 포스팅은 이것으로 끝입니다.<br>
+물론 지금 설정만으로는 배포 중간에 빌드에러가 발생합니다.<br>
+에러를 해결하고, Next.js 13에서 build 결과물을 정적 자원으로 바꾸는 세부 내용은 다음 포스트에 작성하겠습니다.
