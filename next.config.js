@@ -3,6 +3,7 @@ const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 /** @type {import('next').NextConfig} */
 const nextConfig = (phase, { defaultConfig }) => {
   let config = {
+    // output: "export",
     images: {
       unoptimized: true,
     },
