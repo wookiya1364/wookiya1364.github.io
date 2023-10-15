@@ -17,7 +17,6 @@ const nextConfig = (phase, { defaultConfig }) => {
 
   config.output = "export";
   config.env.BASE_URL = "https://wookiya1364.github.io/";
-  config.exclude = ["/src/api/*/*.ts"];
 
   return config;
 };

@@ -38,6 +38,9 @@ export default function PostDescript() {
           ref={titleRef}
           type="title"
           placeholder="제목을 입력하세요."
+          onChange={() => {
+            localStorage.setItem("title", titleRef.current?.value!);
+          }}
         />
         <Button
           className="outline outline-1 p-2 w-[70px]"
@@ -61,18 +64,27 @@ export default function PostDescript() {
           type="summary"
           placeholder="요약을 입력하세요."
           className="text-[1.3rem]"
+          onChange={() => {
+            localStorage.setItem("summary", summaryRef.current?.value!);
+          }}
         />
         <Textarea
           ref={descriptionRef}
           type="description"
           placeholder="설명을 입력하세요."
           className="text-[1.3rem]"
+          onChange={() => {
+            localStorage.setItem("description", descriptionRef.current?.value!);
+          }}
         />
         <Textarea
           ref={thumbnailRef}
           type="thumbnail"
           placeholder="썸네일 경로를 입력하세요."
           className="text-[1.3rem]"
+          onChange={() => {
+            localStorage.setItem("thumbnail", thumbnailRef.current?.value!);
+          }}
         />
       </Row>
     </FieldSet>
