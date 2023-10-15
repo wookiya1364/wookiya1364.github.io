@@ -13,6 +13,7 @@ const nextConfig = (phase, { defaultConfig }) => {
   };
 
   if (phase === PHASE_DEVELOPMENT_SERVER) {
+    console.log("DEV SERVER");
     return config;
   }
 

@@ -1,7 +1,5 @@
 
 
-# Github blog Private으로 하려면 유료버전을 이용해야 합니다.
-
 # Commit Messages Style
 
 |타입|설명|

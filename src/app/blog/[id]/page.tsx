@@ -63,18 +63,17 @@ const AsideIndex = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default async function PostContainer({ params }: TDynamicRoute) {
-
-  console.log(params);
-  console.log(params);
-  console.log(params);
-  console.log(params);
-  
   const allPosts = (await getAllPost()) as unknown as TBlog[];
-  console.log(allPosts)
   const post = pipe(findID(params))(allPosts) as TBlog;
+  console.log(post)
+
+  console.log(process.env.BLOG_HOST)
+  console.log(post.content)
   const content = await fetch(`${process.env.BLOG_HOST}${post.content}`).then(
     (res) => res.text()
   );
+
+  console.log(content)
 
   return (
     <Column as="main" className="justify-start items-start">

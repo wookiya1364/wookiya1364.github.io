@@ -4,7 +4,7 @@ import Blog from "./blog/page";
 export default function Home() {
   return (
     <Fragment>
-      <Blog />
+      {/* <Blog /> */}
     </Fragment>
   );
 }
