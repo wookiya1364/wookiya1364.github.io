@@ -26,8 +26,8 @@ type TID = {
   id: string;
 };
 type TBlog = {
-  id: string | number;
-  seq: string | number;
+  id: string;
+  seq: string;
   title: string;
   content: string;
   description?: string;

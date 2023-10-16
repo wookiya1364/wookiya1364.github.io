@@ -42,11 +42,21 @@ const getDate = () => `${new Date().toISOString().split("T")[0]}`;
 
 const HOST = process.env.BLOG_HOST;
 
-async function getAllPost() {
-  const url = `${process.env.BLOG_HOST}api/blog`;
-  return await fetch(url, {
+async function getAllPost(): Promise<TBlog[]> {
+  const host = process.env.NODE_ENV === "production" ? "https://wookiya1364.github.io/" : "http://localhost:3000/";
+  console.log("\n");
+  console.log(host)
+  const url = `${host}api/blog`;
+  console.log(url);
+  const result = await fetch(url, {
     method: "GET",
+    cache: "force-cache"
   }).then((res) => res.json());
+  debugger;
+  // .then((res) => res.json());
+  console.log("result")
+  console.log(result)
+  return result;
 }
 
 export {

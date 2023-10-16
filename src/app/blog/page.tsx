@@ -1,9 +1,13 @@
+"use client";
+
 import { Row } from "@atom/row";
 import { Itemlist } from "@molecule/Itemlist";
 import Link from "next/link";
 import { Column } from "@atom/column";
 import PostPage from "./post";
 import { getAllPost } from "@utils/util";
+import { useState, useEffect, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 
 const BlogSection = () => {
   const nav = ["react", "next.js"];
@@ -18,8 +22,20 @@ const BlogSection = () => {
   );
 };
 
-export default async function Blog() {
-  const allPosts = (await getAllPost()) as unknown as TBlog[];
+export default function Blog() {
+  const searchParams = useSearchParams();
+  const id = useMemo(() => {
+    return { id: searchParams.get("id") as string };
+  }, [searchParams]);
+  const [posts, setPosts] = useState<TBlog[]>([]);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const posts = await getAllPost();
+      setPosts(posts);
+    };
+
+    fetchPosts();
+  }, [id]);
 
   return (
     <Column as="article">
@@ -28,7 +44,7 @@ export default async function Blog() {
         as="section"
         className="justify-items-center justify-center grid grid-flow-dense gap-y-20 gap-x-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
       >
-        {allPosts.map((post, idx: number) => (
+        {posts.map((post, idx: number) => (
           <PostPage key={idx} post={post} />
         ))}
       </Itemlist>

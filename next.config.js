@@ -3,7 +3,7 @@ const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 /** @type {import('next').NextConfig} */
 const nextConfig = (phase, { defaultConfig }) => {
   let config = {
-    // output: "export",
+    output: "export",
     images: {
       unoptimized: true,
     },
@@ -17,7 +17,7 @@ const nextConfig = (phase, { defaultConfig }) => {
     return config;
   }
 
-  config.output = "export";
+  // config.output = "export";
   config.env.BASE_URL = "https://wookiya1364.github.io/";
 
   return config;

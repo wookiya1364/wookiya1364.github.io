@@ -35,9 +35,10 @@ const Itemlist = React.forwardRef<HTMLDivElement, ItemlistProps>(
 );
 
 const ItemImage = ({ children, className, item }: ItemProps) => {
-  if (item.id === "(...)blog") {
+  if (item.id === "(...)blog" || item.thumbnail === "" || item.title === "") {
     return null;
   }
+
   return (
     <Column className={cn("cursor-pointer", className)}>
       <Column
