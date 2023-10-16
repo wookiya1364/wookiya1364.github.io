@@ -8,10 +8,10 @@ import { Label } from "@atom/label";
 import { FieldSet } from "@atom/field";
 import LinkIcon from "public/link";
 import TwitterIcon from "public/twitter";
-// import type { Metadata, ResolvingMetadata } from "next";
 import PostContent from "./post_content";
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 type Props = {
   params: { id: string };
@@ -31,6 +31,30 @@ const ShareSNS = ({ post }: { post: TBlog }) => {
   );
 };
 
+const IndexViewer = ({ content }: { content: string }) => {
+  const pattern = /\[.*?\]\(#\S+\)/g;
+  const matches = content.match(pattern);
+
+  return (
+    <Row as="div" className="absolute top-[15rem] w-4/5">
+      <FieldSet fieldTitle="목차" className="w-full border-1">
+        <Column className="w-full p-[10px] justify-between items-start">
+          {
+            matches?.map((item,idx) => {
+              item = item.replaceAll("(", "").replaceAll(")", "");
+              const href = item.split("]")[1];
+              item = item.split("]")[0].replaceAll("[", "");
+              return (
+                <Link key={idx} href={href} className="hover:underline mt-[1rem] text-[1.5rem] break-keep">{item}</Link>
+              )
+            })
+          }
+        </Column>
+      </FieldSet>
+    </Row>
+  );
+};
+
 const AsideIndex = ({ children }: { children: React.ReactNode }) => {
   return (
     <Column
@@ -38,12 +62,11 @@ const AsideIndex = ({ children }: { children: React.ReactNode }) => {
       className="sticky top-0 bottom-0 left-0 hidden h-screen lg:w-[30%] lg:flex"
     >
       {children}
-      <Column className="absolute top-0 right-0 bottom-0"></Column>
+      {/* <Column className="absolute top-0 right-0 bottom-0"></Column> */}
     </Column>
   );
 };
 
-// export default function PostContainer({ params }: TDynamicRoute) {
 export default function PostContainer() {
   const searchParams = useSearchParams();
   const id = useMemo(() => {
@@ -79,20 +102,6 @@ export default function PostContainer() {
     fetchPosts();
   }, [id]);
 
-  // console.log(content);
-
-  // const posts = (await getAllPost()) as unknown as TBlog[];
-  // const post = pipe(findID(params))(posts) as TBlog;
-  // console.log(post);
-
-  // console.log(process.env.BLOG_HOST);
-  // console.log(post.content);
-  // const content = await fetch(`${process.env.BLOG_HOST}${post.content}`).then(
-  //   (res) => res.text()
-  // );
-
-  // console.log(content);
-
   return (
     <Fragment>
       <Column as="article" className="w-full lg:w-[70%] px-12">
@@ -105,6 +114,7 @@ export default function PostContainer() {
       </Column>
       <AsideIndex>
         <ShareSNS post={post} />
+        <IndexViewer content={content} />
       </AsideIndex>
     </Fragment>
   );

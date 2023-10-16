@@ -9,8 +9,8 @@ import 'react-toastify/dist/ReactToastify.min.css';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Home | Wooki",
-  description: "개인 블로그 입니다.",
+  title: "우기's Journal Home",
+  description: "우기's Journal Home 화면 입니다.",
 };
 
 export default function RootLayout({

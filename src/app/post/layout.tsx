@@ -11,16 +11,17 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
+
+export const metadata: Metadata = {
+  title: "우기's Journal | Post",
+  description: "우기's Journal 포스트 입니다.",
+};
+
+
 // export async function generateMetadata(
 //   { params, searchParams }: Props,
 //   parent: ResolvingMetadata
 // ): Promise<Metadata> {
-//   console.log("params");
-//   console.log("params");
-//   console.log("params");
-//   console.log("params");
-//   console.log(params);
-//   console.log(params);
 //   console.log(params);
 //   const allPosts = (await getAllPost()) as unknown as TBlog[];
 //   const post = pipe(findID(params))(allPosts) as TBlog;
@@ -34,6 +35,7 @@ type Props = {
 //     },
 //   };
 // }
+
 
 // export async function generateStaticParams() {
 //   return (await getAllPost()) as unknown as TBlog[];
@@ -82,12 +84,9 @@ export default async function PostLayout({
   // console.log(content);
 
   return (
-    <Column as="main" className="justify-start items-start">
-      <Row className="w-full">
+    <Column as="main" className="justify-start items-center">
+      <Row className="w-full max-w-[1920px]">
         {children}
-        {/* <AsideIndex>
-          <ShareSNS post={post} />
-        </AsideIndex> */}
       </Row>
     </Column>
   );

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog | Wooki",
-  description: "개인 블로그 입니다.",
+  title: "우기's Journal | Blog",
+  description: "우기's Journal 깃허브 블로그 입니다.",
 };
 
 export default function RootLayout({
