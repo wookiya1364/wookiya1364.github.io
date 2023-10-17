@@ -3,14 +3,17 @@ import React from "react";
 
 export interface FieldSetProps
   extends React.ObjectHTMLAttributes<HTMLFieldSetElement> {
-    fieldTitle: string;
-  }
+  fieldTitle: string;
+  label?: string;
+}
 
 const FieldSet = React.forwardRef<HTMLFieldSetElement, FieldSetProps>(
-  ({ className, children, fieldTitle, ...props }, ref) => {
+  ({ className, children, fieldTitle, label = "", ...props }, ref) => {
     const Component = "fieldset";
+    const ariaLabel = label || "";
     return (
       <Component
+        aria-label={ariaLabel}
         className={cn("flex flex-col items-center field-container", className)}
         ref={ref}
         {...props}

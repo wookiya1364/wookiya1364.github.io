@@ -1,5 +1,3 @@
-
-
 # Commit Messages Style
 
 |타입|설명|
