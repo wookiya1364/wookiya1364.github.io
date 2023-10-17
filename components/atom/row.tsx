@@ -3,11 +3,13 @@ import React from "react";
 
 export interface RowProps extends React.ObjectHTMLAttributes<HTMLDivElement> {
   as?: TContainer;
+  label?: string;
 }
 
 const Row = React.forwardRef<HTMLDivElement, RowProps>(
-  ({ className, children, as, ...props }, ref) => {
+  ({ className, children, as, label, ...props }, ref) => {
     const Component = as || "div";
+    const ariaLabel = label || "";
     return (
       <Component
         className={cn("flex flex-row items-center", className)}

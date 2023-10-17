@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { ButtonProps } from "./button";
 import { MouseEvent, useState } from "react";
+import React from "react";
 
 function TestButton(props: ButtonProps) {
   const [value, setValue] = useState(0);
@@ -27,21 +28,21 @@ const setup = (props?: ButtonProps) => {
   };
 };
 
-describe("Button", () => {
+describe("Button rendering", () => {
   const buttonText = "테스트";
 
-  it("Button rendering", () => {
+  it("textContent", () => {
     const { element } = setup();
     element.textContent = buttonText;
     expect(element.textContent).toBe(buttonText);
   });
 
-  it("Button as BUTTON", () => {
+  it("as BUTTON", () => {
     const { element } = setup();
     expect(element.nodeName).toBe("BUTTON");
   });
 
-  it("Button as SPAN", () => {
+  it("as SPAN", () => {
     const { element } = setup({
       as: "span",
     });
@@ -55,13 +56,13 @@ describe("Button Event", () => {
     e.currentTarget.classList.add("bg-red");
   };
 
-  it("Button Click to 100", () => {
+  it("Click to 100", () => {
     const { element } = setup();
     [...Array(100).keys()].map((i) => fireEvent.click(element));
     expect(element.textContent).toBe("100");
   });
 
-  it("Button Click Color Change from black to red", () => {
+  it("Click Color Change from black to red", () => {
     const { element } = setup({
       className: "bg-black",
       onClick: handleClick,

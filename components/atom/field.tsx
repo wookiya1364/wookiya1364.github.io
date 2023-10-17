@@ -2,8 +2,8 @@ import { cn } from "components/util/cn";
 import React from "react";
 
 export interface FieldSetProps
-  extends React.ObjectHTMLAttributes<HTMLFieldSetElement> {
-  fieldTitle: string;
+  extends React.FieldsetHTMLAttributes<HTMLFieldSetElement> {
+  fieldTitle?: string;
   label?: string;
 }
 

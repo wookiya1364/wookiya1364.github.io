@@ -1,15 +1,17 @@
 import { cn } from "components/util/cn";
 import React from "react";
 
-export interface LabelProps extends React.ObjectHTMLAttributes<HTMLDivElement> {
+export interface LabelProps extends React.ObjectHTMLAttributes<HTMLParagraphElement> {
   as?: TLabel;
+  label?: string;
 }
 
-const Label = React.forwardRef<HTMLDivElement, LabelProps>(
-  ({ className, children, as, ...props }, ref) => {
+const Label = React.forwardRef<HTMLParagraphElement, LabelProps>(
+  ({ className, children, as, label, ...props }, ref) => {
     const Component = as || "p";
+    const ariaLabel = label || "label-label";
     return (
-      <Component className={cn("font-medium", className)} ref={ref} {...props}>
+      <Component className={cn("font-medium", className)} aria-label={ariaLabel} ref={ref} {...props}>
         {children}
       </Component>
     );
