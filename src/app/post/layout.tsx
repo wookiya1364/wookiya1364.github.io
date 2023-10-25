@@ -1,10 +1,9 @@
 import { Row } from "@atom/row";
 import { Column } from "@atom/column";
-import { findID, getAllPost, pipe } from "@utils/util";
 import { FieldSet } from "@atom/field";
 import LinkIcon from "public/link";
 import TwitterIcon from "public/twitter";
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 
 type Props = {
   params: { id: string };

@@ -40,14 +40,25 @@ const shareFacebook = (text: string, url: string) => {
 
 const getDate = () => `${new Date().toISOString().split("T")[0]}`;
 
-const HOST = process.env.BLOG_HOST;
+const HOST = process.env.NODE_ENV === "production"
+? "https://wookiya1364.github.io/"
+: "http://localhost:3000/";
+
+async function getBlog() {  
+  const url = `${HOST}posts/blog.json`;
+  return await fetch(url, {
+    method: "GET",
+    cache: "force-cache",
+  }).then((res) => res.json());
+
+}
 
 async function getAllPost(): Promise<TBlog[]> {
-  const host = process.env.NODE_ENV === "production" ? "https://wookiya1364.github.io/" : "http://localhost:3000/";
-  const url = `${host}api/blog`;
+  const url = `${HOST}api/blog`;
+  console.log(url);
   const result = await fetch(url, {
     method: "GET",
-    cache: "force-cache"
+    cache: "force-cache",
   }).then((res) => res.json());
   return result;
 }
@@ -59,6 +70,7 @@ export {
   toastSuccess,
   shareTwitter,
   shareFacebook,
+  getBlog,
   getAllPost,
   getDate,
   HOST,

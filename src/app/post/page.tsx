@@ -3,7 +3,7 @@
 import { Row } from "@atom/row";
 import { ItemDate, ItemImage } from "@molecule/Itemlist";
 import { Column } from "@atom/column";
-import { findID, getAllPost, pipe } from "@utils/util";
+import { findID, getAllPost, getBlog, pipe } from "@utils/util";
 import { Label } from "@atom/label";
 import { FieldSet } from "@atom/field";
 import LinkIcon from "public/link";
@@ -90,8 +90,9 @@ export default function PostContainer() {
         ? "https://wookiya1364.github.io/"
         : "http://localhost:3000/";
     const fetchPosts = async () => {
-      const posts = await getAllPost();
-      const post = pipe(findID(id))(posts) as TBlog;
+      // const posts = await getAllPost();
+      const blog = await getBlog();
+      const post = pipe(findID(id))(blog) as TBlog;
       const content = await fetch(`${host}${post.content}`).then((res) =>
         res.text()
       );

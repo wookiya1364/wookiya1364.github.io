@@ -7,12 +7,11 @@ type TPost = { post: TBlog };
 export default function PostPage({ post }: TPost) {
   return (
     <Link
-      // href={`blog/${post.id}`}
       href={`post?id=${post.id}`}
       onClick={() => {
         localStorage.setItem("blogID", post?.id)!;
       }}
-      className="w-full"
+      className="w-full h-full"
       scroll={false}
     >
       <ItemImage item={post} className="border-[1px]">

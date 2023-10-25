@@ -2,9 +2,8 @@ import { getDate } from "@utils/util";
 import { promises as fs } from "fs";
 import { NextRequest, NextResponse } from "next/server";
 
-const dynamic = process.env.NODE_ENV === "production" ? "force-static" : "force-static";
 // const dynamic = process.env.NODE_ENV === "production" ? "force-static" : "auto";
-// const dynamic = process.env.NODE_ENV === "production" ? "force-static" : "force-dynamic";
+const dynamic = process.env.NODE_ENV === "production" ? "force-static" : "force-static";
 const basePaths = `${process.cwd()}/public/posts/`;
 
 const getPostInfo = () => {
