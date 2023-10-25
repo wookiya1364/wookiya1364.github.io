@@ -4,18 +4,29 @@ import { Button } from "@atom/button";
 import { FieldSet } from "@atom/field";
 import { Row } from "@atom/row";
 import { Textarea } from "@atom/textarea";
-import { useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
-const writePost = async (rest: Omit<TBlog, "id" | "content" | "create" | "seq">) => {
-  await fetch(
-    `/api/code?title=${rest.title}
-    &summary=${rest.summary}
-    &description=${rest.description}
-    &thumbnail=${rest.thumbnail}`,
-    {
-      method: "GET",
-    }
-  );
+const writePost = async (
+  rest: Omit<TBlog, "id" | "content" | "create" | "seq">
+) => {
+  const param = {
+    title: rest.title,
+    summary: rest.summary,
+    thumbnail: rest.thumbnail,
+  };
+
+  await fetch(`/api/blog`, {
+    method: "POST",
+    body: JSON.stringify(param),
+  });
+  // await fetch(
+  //   `/api/code?title=${rest.title}
+  //   &summary=${rest.summary}
+  //   &thumbnail=${rest.thumbnail}`,
+  //   {
+  //     method: "GET",
+  //   }
+  // );
 
   await fetch(`/api/code`, {
     method: "POST",
@@ -29,6 +40,22 @@ export default function PostDescript() {
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const thumbnailRef = useRef<HTMLTextAreaElement>(null);
 
+  const setFieldValue = useCallback((name: string, value: string) => {
+    localStorage.setItem(name, value);
+  }, []);
+  const getFieldValue = useCallback((name: string) => {
+    if (localStorage !== undefined) {
+      return localStorage.getItem(name) || "";
+    }
+    return "";
+  }, []);
+
+  useEffect(() => {
+    titleRef.current!.value = getFieldValue("title");
+    summaryRef.current!.value = getFieldValue("summary");
+    thumbnailRef.current!.value = getFieldValue("thumbnail");
+  }, [getFieldValue]);
+
   return (
     <FieldSet fieldTitle={"블로그"} className="w-full items-start">
       <Row className="w-full p-[1rem]">
@@ -36,9 +63,8 @@ export default function PostDescript() {
           ref={titleRef}
           type="title"
           placeholder="제목을 입력하세요."
-          defaultValue={localStorage.getItem("title")!}
           onChange={() => {
-            localStorage.setItem("title", titleRef.current?.value!);
+            setFieldValue("title", titleRef.current?.value!);
           }}
         />
         <Button
@@ -63,17 +89,15 @@ export default function PostDescript() {
           ref={summaryRef}
           type="summary"
           placeholder="요약을 입력하세요."
-          defaultValue={localStorage.getItem("summary")!}
           className="text-[1.3rem] break-keep"
           onChange={() => {
-            localStorage.setItem("summary", summaryRef.current?.value!);
+            setFieldValue("summary", summaryRef.current?.value!);
           }}
         />
         {/* <Textarea
           ref={descriptionRef}
           type="description"
           placeholder="설명을 입력하세요."
-          defaultValue={localStorage.getItem("description")!}
           className="text-[1.3rem]"
           onChange={() => {
             localStorage.setItem("description", descriptionRef.current?.value!);
@@ -83,10 +107,9 @@ export default function PostDescript() {
           ref={thumbnailRef}
           type="thumbnail"
           placeholder="썸네일 경로를 입력하세요."
-          defaultValue={localStorage.getItem("thumbnail")!}
           className="text-[1.3rem]"
           onChange={() => {
-            localStorage.setItem("thumbnail", thumbnailRef.current?.value!);
+            setFieldValue("thumbnail", thumbnailRef.current?.value!);
           }}
         />
       </Row>

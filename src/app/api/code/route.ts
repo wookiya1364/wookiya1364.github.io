@@ -2,7 +2,9 @@ import { getDate } from "@utils/util";
 import { promises as fs } from "fs";
 import { NextRequest, NextResponse } from "next/server";
 
-const dynamic = process.env.NODE_ENV === "production" ? "force-static" : "auto";
+const dynamic = process.env.NODE_ENV === "production" ? "force-static" : "force-static";
+// const dynamic = process.env.NODE_ENV === "production" ? "force-static" : "auto";
+// const dynamic = process.env.NODE_ENV === "production" ? "force-static" : "force-dynamic";
 const basePaths = `${process.cwd()}/public/posts/`;
 
 const getPostInfo = () => {
@@ -25,6 +27,7 @@ const getPostInfo = () => {
   return result;
 };
 
+/*
 export async function GET(request: NextRequest) {
   let read;
   let postInfo: Record<string, string | number> = getPostInfo();
@@ -40,6 +43,7 @@ export async function GET(request: NextRequest) {
     const jsonRead = JSON.parse(read);
     postInfo.seq = jsonRead.length;
     jsonRead.push(postInfo);
+    // console.log(postInfo)
     if (postInfo.title.toString().trim() !== "") {
       await fs.writeFile(path, JSON.stringify(jsonRead));
     }
@@ -51,6 +55,7 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json({ json: postInfo });
 }
+*/
 
 export async function POST(request: NextRequest) {
   const data = await request.json();
