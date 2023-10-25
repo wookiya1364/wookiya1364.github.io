@@ -6,7 +6,8 @@ import { NextRequest, NextResponse } from "next/server";
 const dynamic = process.env.NODE_ENV === "production" ? "force-static" : "force-static";
 
 export async function GET(request: NextRequest) {
-  const paths = `${process.cwd()}/public/posts/blog.json`;
+  // const paths = `${process.cwd()}/public/posts/blog.json`;
+  const paths = `/public/posts/blog.json`;
   const json = await fs.readFile(paths, "utf8");
   return NextResponse.json(JSON.parse(json));
 }

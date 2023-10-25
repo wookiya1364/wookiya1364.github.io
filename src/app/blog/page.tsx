@@ -31,6 +31,7 @@ export default function Blog() {
   useEffect(() => {
     const fetchPosts = async () => {
       const posts = await getAllPost();
+      posts.sort((a, b) => parseInt(b.seq) - parseInt(a.seq))
       setPosts(posts);
     };
 

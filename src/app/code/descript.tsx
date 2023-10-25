@@ -19,14 +19,6 @@ const writePost = async (
     method: "POST",
     body: JSON.stringify(param),
   });
-  // await fetch(
-  //   `/api/code?title=${rest.title}
-  //   &summary=${rest.summary}
-  //   &thumbnail=${rest.thumbnail}`,
-  //   {
-  //     method: "GET",
-  //   }
-  // );
 
   await fetch(`/api/code`, {
     method: "POST",
