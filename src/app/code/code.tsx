@@ -26,10 +26,25 @@ export default function Code() {
   const macroMention = useMemo(
     () => [
       {
+        displayLabel: "개행",
+        label: `@개행`,
+        apply: `<br>`,
+      },
+      {
         displayLabel: "목차",
         label: `@목차`,
         apply: `[목차](#id)
 # id`,
+      },
+      {
+        displayLabel: "목차ID",
+        label: "@목차ID",
+        apply: `<span id=""></span>`,
+      },
+      {
+        displayLabel: "컬러강조",
+        label: "@컬러강조",
+        apply: `<span style="color:white; background-color:green; padding: 0px 5px; border-radius:100px;"></span>`,
       },
       {
         displayLabel: "코드주석",

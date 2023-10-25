@@ -4,7 +4,6 @@ import { Button } from "@atom/button";
 import { FieldSet } from "@atom/field";
 import { Row } from "@atom/row";
 import { Textarea } from "@atom/textarea";
-import useClipBoard from "@utils/useClipboard";
 import { useRef } from "react";
 
 const writePost = async (rest: Omit<TBlog, "id" | "content" | "create" | "seq">) => {
@@ -29,7 +28,6 @@ export default function PostDescript() {
   const summaryRef = useRef<HTMLTextAreaElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const thumbnailRef = useRef<HTMLTextAreaElement>(null);
-  const [isCopy, setCopy] = useClipBoard();
 
   return (
     <FieldSet fieldTitle={"블로그"} className="w-full items-start">
@@ -38,12 +36,14 @@ export default function PostDescript() {
           ref={titleRef}
           type="title"
           placeholder="제목을 입력하세요."
+          defaultValue={localStorage.getItem("title")!}
           onChange={() => {
             localStorage.setItem("title", titleRef.current?.value!);
           }}
         />
         <Button
           className="outline outline-1 p-2 w-[70px]"
+          tabIndex={-1}
           onClick={async () => {
             const param = {
               title: titleRef.current?.value!,
@@ -63,24 +63,27 @@ export default function PostDescript() {
           ref={summaryRef}
           type="summary"
           placeholder="요약을 입력하세요."
-          className="text-[1.3rem]"
+          defaultValue={localStorage.getItem("summary")!}
+          className="text-[1.3rem] break-keep"
           onChange={() => {
             localStorage.setItem("summary", summaryRef.current?.value!);
           }}
         />
-        <Textarea
+        {/* <Textarea
           ref={descriptionRef}
           type="description"
           placeholder="설명을 입력하세요."
+          defaultValue={localStorage.getItem("description")!}
           className="text-[1.3rem]"
           onChange={() => {
             localStorage.setItem("description", descriptionRef.current?.value!);
           }}
-        />
+        /> */}
         <Textarea
           ref={thumbnailRef}
           type="thumbnail"
           placeholder="썸네일 경로를 입력하세요."
+          defaultValue={localStorage.getItem("thumbnail")!}
           className="text-[1.3rem]"
           onChange={() => {
             localStorage.setItem("thumbnail", thumbnailRef.current?.value!);
