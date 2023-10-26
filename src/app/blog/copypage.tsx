@@ -1,8 +1,12 @@
+"use client";
+
 import { Row } from "@atom/row";
 import { Itemlist } from "@molecule/Itemlist";
 import Link from "next/link";
 import { Column } from "@atom/column";
 import PostPage from "./post";
+import { useState, useEffect, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import { getBlog } from "@utils/util";
 
 const BlogSection = () => {
@@ -18,8 +22,20 @@ const BlogSection = () => {
   );
 };
 
-export default async function Blog() {
-  const posts:TBlog[] = await getBlog();
+export default function CopyBlog() {
+  const searchParams = useSearchParams();
+  const id = useMemo(() => {
+    return { id: searchParams.get("id") as string };
+  }, [searchParams]);
+  const [posts, setPosts] = useState<TBlog[]>([]);
+
+  useEffect(() => {
+    const initialize = async () => {
+      const blog = await getBlog();
+      setPosts(blog.sort((a:any, b:any) => parseInt(b.seq) - parseInt(a.seq)));
+    };
+    initialize();
+  }, [id]);
 
   return (
     <Column as="article">

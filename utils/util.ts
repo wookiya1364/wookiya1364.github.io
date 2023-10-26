@@ -40,28 +40,47 @@ const shareFacebook = (text: string, url: string) => {
 
 const getDate = () => `${new Date().toISOString().split("T")[0]}`;
 
-const HOST = process.env.NODE_ENV === "production"
-? "https://wookiya1364.github.io/"
-: "http://localhost:3000/";
+const HOST =
+  process.env.NODE_ENV === "production"
+    ? "https://wookiya1364.github.io/"
+    : "http://localhost:3000/";
 
-async function getBlog() {  
+async function getBlog(): Promise<TBlog[]> {
   const url = `${HOST}posts/blog.json`;
   return await fetch(url, {
     method: "GET",
-    cache: "force-cache",
-  }).then((res) => res.json());
-
+    // cache: "force-cache",
+    next: { revalidate: 10 },
+  })
+    .then((res) => res.json())
+    .then((res) =>
+      res.sort((a: any, b: any) => parseInt(b.seq) - parseInt(a.seq))
+    );
 }
 
-async function getAllPost(): Promise<TBlog[]> {
-  const url = `${HOST}api/blog`;
-  console.log(url);
-  const result = await fetch(url, {
+async function getPost(param: any) {
+  const blog: TBlog[] = await getBlog();
+  const targetPost = blog.find((item) => item.seq == "0");
+  const segment =
+    param?.props?.childProp?.segment?.split("?")[1] || JSON.stringify(targetPost);
+  const childID = JSON.parse(segment);
+  const post = pipe(findID(childID))(blog) as TBlog;
+  const content = await fetch(`${HOST}${post.content}`, {
     method: "GET",
-    cache: "force-cache",
-  }).then((res) => res.json());
-  return result;
+    next: { revalidate: 10 },
+  }).then((res) => res.text());
+  return content;
 }
+
+// async function getAllPost(): Promise<TBlog[]> {
+//   const url = `${HOST}api/blog`;
+//   console.log(url);
+//   const result = await fetch(url, {
+//     method: "GET",
+//     cache: "force-cache",
+//   }).then((res) => res.json());
+//   return result;
+// }
 
 export {
   pipe,
@@ -71,7 +90,8 @@ export {
   shareTwitter,
   shareFacebook,
   getBlog,
-  getAllPost,
+  getPost,
+  // getAllPost,
   getDate,
   HOST,
 };

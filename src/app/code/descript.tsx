@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@atom/button";
+import { Column } from "@atom/column";
 import { FieldSet } from "@atom/field";
 import { Row } from "@atom/row";
 import { Textarea } from "@atom/textarea";
@@ -12,6 +13,7 @@ const writePost = async (
   const param = {
     title: rest.title,
     summary: rest.summary,
+    description: rest.description,
     thumbnail: rest.thumbnail,
   };
 
@@ -45,6 +47,7 @@ export default function PostDescript() {
   useEffect(() => {
     titleRef.current!.value = getFieldValue("title");
     summaryRef.current!.value = getFieldValue("summary");
+    descriptionRef.current!.value = getFieldValue("description");
     thumbnailRef.current!.value = getFieldValue("thumbnail");
   }, [getFieldValue]);
 
@@ -86,15 +89,17 @@ export default function PostDescript() {
             setFieldValue("summary", summaryRef.current?.value!);
           }}
         />
-        {/* <Textarea
+        <Column className="w-[10px] mr-[20px] border-b-[100px]" />
+        <Textarea
           ref={descriptionRef}
           type="description"
           placeholder="설명을 입력하세요."
           className="text-[1.3rem]"
           onChange={() => {
-            localStorage.setItem("description", descriptionRef.current?.value!);
+            setFieldValue("description", descriptionRef.current?.value!);
           }}
-        /> */}
+        />
+        <Column className="w-[10px] mr-[20px] border-b-[100px]" />
         <Textarea
           ref={thumbnailRef}
           type="thumbnail"

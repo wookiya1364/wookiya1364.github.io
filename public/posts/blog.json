@@ -14,7 +14,7 @@
     "seq": 1,
     "title": "Next.js 13 Github Blog 만들기(2)",
     "content": "/posts/2023/10/25.mdx",
-    "description": "",
+    "description": "Next.js 13으로 Github Blog를 만들기.",
     "summary": "이번 포스팅에서는 Next.js 13으로 Github Blog를 배포할 때, 발생하는 빌드에러를 해결하도록 하겠습니다.",
     "thumbnail": "/image/2023/10/06/Nextjs-logo.png",
     "create": "2023년 10월 25일"
