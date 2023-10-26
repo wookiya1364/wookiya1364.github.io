@@ -22,10 +22,11 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const posts = await getBlog();
   const post = posts.find(item => item.id == params.id);
+
   return {
     title: post?.title,
     description: post?.description,
-    // metadataBase: new URL(process.env.BLOG_HOST?.toString()!),
+    metadataBase: new URL(HOST),
     icons: [post?.thumbnail!],
     openGraph: {
       images: [post?.thumbnail!],
