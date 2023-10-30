@@ -52,8 +52,9 @@ const IndexViewer = ({ content }: { content: string }) => {
               item = item.replaceAll("(", "").replaceAll(")", "");
               const href = item.split("]")[1];
               item = item.split("]")[0].replaceAll("[", "");
+              
               return (
-                <Link key={idx} href={href} className="hover:underline mt-[1rem] text-[1.5rem] break-keep">{item}</Link>
+                <Link key={`${idx}${Math.random()}`} href={href} className="hover:underline mt-[1rem] text-[1.5rem] break-keep">{item}</Link>
               )
             })
           }

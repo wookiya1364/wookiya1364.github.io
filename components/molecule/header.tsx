@@ -10,7 +10,7 @@ let lastScrollY = 0;
 const LinkWrapper = ({ links }: { links: TLink[] }) => {
   return links.map((link, idx) => (
     <Link
-      key={idx}
+      key={`${link.text}_${idx}`}
       href={link.href}
       className="flex justify-center w-full ml-[20px] mt-[20px] lg:mt-[0px] border-b text-[3rem] lg:text-[1rem]"
     >

@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://webfontworld.github.io/gmarket/GmarketSans.css');
+/* @import url('https://webfontworld.github.io/gmarket/GmarketSans.css'); */
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -23,9 +23,15 @@
   }
 }
 
+@font-face {
+  font-family: "GmarketSans";
+  src: url("/fonts/GmarketSansTTFMedium.ttf");
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background-color: var(--background-color);
+  font-family: GmarketSans;
 }
 .header {
   transform: translateY(-100%);
