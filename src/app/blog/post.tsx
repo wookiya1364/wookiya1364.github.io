@@ -7,7 +7,6 @@ type TPost = { post: TBlog };
 export default function PostPage({ post }: TPost) {
   return (
     <Link
-      // href={`post?id=${post.id}`}
       href={`post/${post.id}`}
       onClick={() => {
         localStorage.setItem("blogID", post?.id)!;

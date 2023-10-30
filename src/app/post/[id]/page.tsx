@@ -101,7 +101,7 @@ export default async function PostContainer({params} : TParams) {
   return (
     <Fragment>
       <Column as="article" className="w-full lg:w-[70%] px-12">
-        <Label as="h1" className="text-[3rem] font-bold">
+        <Label as="h1" className="text-[3rem] font-bold" aria-label={post.title}>
           {post.title}
         </Label>
         <ItemDate item={post} className="my-[1rem]" />

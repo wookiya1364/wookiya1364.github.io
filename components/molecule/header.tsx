@@ -77,7 +77,7 @@ export default function Header() {
       header ${isHeaderVisible ? "show" : ""}`}
       >
         <Row>
-          <Link href={"/"} className="font-bold text-[2rem]">
+          <Link href={"/"} className="font-bold text-[2rem]" aria-label="우기's Journal">
             {"우기's Journal"}
           </Link>
         </Row>
