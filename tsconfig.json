@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,12 +24,29 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@atom/*": ["components/atom/*"],
-      "@molecule/*": ["components/molecule/*"],
-      "@blog/*": ["public/posts/*"],
-      "@utils/*": ["utils/*"],
+      "@atom/*": [
+        "components/atom/*"
+      ],
+      "@molecule/*": [
+        "components/molecule/*"
+      ],
+      "@blog/*": [
+        "public/posts/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "**/*.test.tsx"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "out/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.tsx"
+  ]
 }

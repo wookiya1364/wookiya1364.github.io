@@ -4,6 +4,7 @@ const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 const nextConfig = (phase, { defaultConfig }) => {
   let config = {
     output: "export",
+    distDir: "out",
     images: {
       unoptimized: true,
     },

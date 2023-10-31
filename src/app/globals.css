@@ -4,12 +4,19 @@
 /* @import url('https://webfontworld.github.io/gmarket/GmarketSans.css'); */
 
 :root {
-  --foreground-rgb: 0, 0, 0;
+  /* --foreground-rgb: 0, 0, 0;
   --background-color: #ffffff;
   --border-color: #cccccc;
   --font-color: #6c6c6c;
   --reverse-font-color: #000000;
-  --content-color: rgb(102, 102, 102);
+  --content-color: rgb(102, 102, 102); */
+
+  --foreground-rgb: 255, 255, 255;
+  --background-color: #000000;
+  --border-color: #575d5d;
+  --font-color: #ffffff9c;
+  --reverse-font-color: #ffffff;
+  --content-color: rgb(179, 179, 179);
 }
 
 @media (prefers-color-scheme: dark) {
