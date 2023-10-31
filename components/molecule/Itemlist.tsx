@@ -61,6 +61,7 @@ const ItemImage = ({ children, className, item }: ItemProps) => {
           />
         </Column>
       </Column>
+          <ItemDate item={item} className="content-color" />
       {children}
     </Column>
   );
@@ -85,23 +86,15 @@ const ItemDate = ({ item, className }: ItemProps) => {
 const ItemDescript = ({ className, item }: ItemProps) => {
   return (
     <Column className={cn("w-full overflow-auto block", className)}>
-      <Column className="w-full items-start px-[1rem] border-t-[1px]">
-        {/* <Button
-          className={cn(
-            "w-full overflow-auto bg-lime-400 hover:bg-teal-400 border-y-[1px] rounded-[4px] font-bold text-[1.2rem] text-black",
-            className
-          )}
-        >
-          {"들어가기"}
-        </Button> */}
-        <Label as="h1" className="w-full text-[1.5rem]">
+      <Column className="w-full h-full items-start px-[1rem] border-t-[1px]">
+        <Label as="h1" className="w-full text-[1.5rem] pt-3 px-6">
           {item.title}
         </Label>
-        <Label className="mt-[10px] break-keep content-color" as="p">
+        <Label className="mt-[10px] break-keep content-color pb-3 px-6" as="p">
           {item.summary}
         </Label>
       </Column>
-      <ItemDate item={item} className="border-t-[1px] content-color" />
+      {/* <ItemDate item={item} className="border-t-[1px] content-color" /> */}
     </Column>
   );
 };

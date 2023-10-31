@@ -14,7 +14,7 @@ export default function PostPage({ post }: TPost) {
       className="w-full h-full"
       scroll={false}
     >
-      <ItemImage item={post} className="border-[1px]">
+      <ItemImage item={post} className="h-full border-[1px]">
         <ItemDescript item={post} />
       </ItemImage>
     </Link>

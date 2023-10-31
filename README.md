@@ -14,3 +14,10 @@
 
 ### mov convert to gif
 ffmpeg -i input.mov -r 10 -loop 0 output.gif
+
+
+### pic convert to webp
+- png to webp
+    - cwebp /Users/mac-develop/Downloads/nb.png -o /Users/mac-develop/Downloads/nb.webp
+- w350h450
+    - cwebp -resize 350 450 /Users/mac-develop/Downloads/사진.jpg -o /Users/mac-develop/Downloads/사진2.jpg

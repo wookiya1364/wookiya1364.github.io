@@ -1,4 +1,6 @@
+import { Column } from "@atom/column";
 import type { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "우기's Journal | Blog",
@@ -10,5 +12,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <Column>
+      {children}
+    </Column>
+  );
 }

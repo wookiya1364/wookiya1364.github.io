@@ -73,7 +73,7 @@ export default function Header() {
         as="header"
         className={`
       w-full py-[0.6rem] px-6 overflow-auto border-b-[1px] lg:px-[6rem]
-      sticky top-0 bottom-0 left-0 right-0 z-[1] bg-[var(--background-color)]
+      sticky top-0 bottom-0 left-0 right-0 z-[5] bg-[var(--background-color)]
       header ${isHeaderVisible ? "show" : ""}`}
       >
         <Row>

@@ -105,7 +105,7 @@ export default async function PostContainer({params} : TParams) {
         <Label as="h1" className="text-[3rem] font-bold" aria-label={post.title}>
           {post.title}
         </Label>
-        <ItemDate item={post} className="my-[1rem]" />
+        {/* <ItemDate item={post} className="my-[1rem]" /> */}
         <ItemImage item={post} className="w-4/5" />
         <PostContent content={content} />
       </Column>
