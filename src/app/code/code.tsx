@@ -28,7 +28,12 @@ export default function Code() {
       {
         displayLabel: "개행",
         label: `@개행`,
-        apply: `<br>`,
+        apply: `<br/>`,
+      },
+      {
+        displayLabel: "문단 전환",
+        label: `@문단전환`,
+        apply: `<br/><br/><br/>`,
       },
       {
         displayLabel: "목차",
@@ -62,7 +67,7 @@ export default function Code() {
       {
         displayLabel: "링크",
         label: "@링크",
-        apply: `- https://naver.com`,
+        apply: `[](url)`,
       },
       {
         displayLabel: "인용 또는 notice",

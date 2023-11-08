@@ -1,23 +1,25 @@
-## 이번 포스팅에서는 Next.js 13으로 Github Blog를 배포할 때, 발생하는 빌드에러를 해결하도록 하겠습니다.
+## 이번 포스팅에서는 Next.js 13, 14로 Github Blog를 배포할 때, 발생하는 빌드에러를 해결하도록 하겠습니다.
 
-깃허브 블로그 만들기 시리즈는 총 3부작으로 구성되며,<br>
-2부에서는 Next.js 13 빌드에러 해결과정을 다룹니다.<br><br>
+깃허브 블로그 만들기 시리즈는 총 3부작으로 구성되며,<br/>
+2부에서는 Next.js 13, 14 빌드에러 해결과정을 다룹니다.<br/><br/>
 
 ## 들어가기에 앞서...
 
-[1부 읽기](https://wookiya1364.github.io/post/brvjspj4y)
+[1부-Next.js 13, 14 Github Blog 만들기(1)](https://wookiya1364.github.io/post/brvjspj4y)<br/>
+[2부-Next.js 13, 14 Github Blog 만들기(2)](https://wookiya1364.github.io/post/7c9ll033h)<br/>
+[3부-Next.js 13, 14 Github Blog 만들기(3)](https://wookiya1364.github.io/post/i2qqh5tw1)<br/>
 
-<br>
-<br>
+<br/>
+<br/>
 
 |2부 목차|설명|
 |---|---|
-|[next.config.js 수정](#nextconfigjs)|Next.js 13의 config.js를 SSG 빌드를 할 수 있도록 수정 합니다.|
+|[next.config.js 수정](#nextconfigjs)|Next.js 13, 14의 config.js를 SSG 빌드를 할 수 있도록 수정 합니다.|
 |[Github Deploy](#github-deploy)|SSG 빌드를 통해 만들어진 정적자산을 Github에 배포 합니다.|
 
-<br>
-<br>
-<br>
+<br/>
+<br/>
+<br/>
 
 <span id="nextconfigjs"></span>
 ## **next.config.js 수정** 
@@ -29,20 +31,28 @@ const nextConfig = {};
 
 module.exports = nextConfig;
 ```
-<br>
+<br/>
 
-여기서 nextConfig의 옵션 값 중 하나인 output을 다음과 같이 수정해야 하는데요<br>
+여기서 nextConfig의 옵션 값 중 하나인 output을 다음과 같이 수정해야 하는데요<br/>
 output에서 설정할 수 있는 값은 
 <span style="color:white; background-color:green; padding: 0px 5px; border-radius:100px;">export</span>와
-<span style="color:white; background-color:green; padding: 0px 5px; border-radius:100px;">standalone</span> 두개의 값이 있지만,<br>
+<span style="color:white; background-color:green; padding: 0px 5px; border-radius:100px;">standalone</span> 두개의 값이 있지만,<br/>
 
-standalone은 node_modules의 선택파일을 포함해서 프로덕션 배포에 필요한 파일만 복사하므로,<br>
-node_modules를 설치하지 않고도 자체적으로 배포할 수 있습니다.<br>
-즉, blog가 아닌 디스코드와 같이 데스크탑앱에 어울리는 형태입니다.<br>
+standalone은 node_modules의 선택파일을 포함해서 프로덕션 배포에 필요한 파일만 복사하므로,<br/>
+node_modules를 설치하지 않고도 자체적으로 배포할 수 있습니다.<br/>
+즉, blog가 아닌 디스코드와 같이 데스크탑앱에 어울리는 형태입니다.<br/>
 
-따라서, 필자는 export값으로 설정했습니다.<br>
+따라서, 필자는 export값으로 설정했습니다.<br/>
 아래와 같이 설정 하시면 됩니다.
 ```jsx showLineNumbers
+Nextjs 14
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: "export",
+  distDir: "out",
+};
+
+Nextjs 13
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export"
@@ -50,12 +60,12 @@ const nextConfig = {
 
 module.exports = nextConfig;
 ```
-<br>
-하지만, output이 export로 설정되면 Next.js 13에서는 image를 최적화 할 수 없습니다.<br>
-Next.js가 빌드타임이 아닌 요청시에 이미지를 최적화 하기 때문입니다.<br><br>
+<br/>
+하지만, output이 export로 설정되면 Next.js 13, 14에서는 image를 최적화 할 수 없습니다.<br/>
+Next.js가 빌드타임이 아닌 요청시에 이미지를 최적화 하기 때문입니다.<br/><br/>
 
-따라서, 포스트에 이미지가 존재한다면 에러를 발생하기 때문에<br>
-[unoptimized 옵션](https://nextjs.org/docs/messages/export-image-api)을 설정을 통해 해결할 수 있습니다.<br>
+따라서, 포스트에 이미지가 존재한다면 에러를 발생하기 때문에<br/>
+[unoptimized 옵션](https://nextjs.org/docs/messages/export-image-api)을 설정을 통해 해결할 수 있습니다.<br/>
 
 ```jsx showLineNumbers
 /** @type {import('next').NextConfig} */
@@ -71,74 +81,74 @@ module.exports = nextConfig;
 
 
 
-<br><br>
+<br/><br/>
 
 <span style="color:white; background-color:green; padding: 0px 5px; border-radius:100px;">export</span>는 공식문서의 설명은 다음과 같습니다.
 
-> 빌드를 실행한 후 애플리케이션의 HTML/CSS/JS 자산이 포함된 out 폴더를 생성합니다.<br>
+> 빌드를 실행한 후 애플리케이션의 HTML/CSS/JS 자산이 포함된 out 폴더를 생성합니다.<br/>
 
 또한 정적빌드 시에 같이 사용하게 되는 옵션들에 대한 설명도 있습니다.
-> distDir:  (string) 값이 설정되면 해당 경로로 정적자산(HTML/CSS/JS)이 생성됩니다.<br>
-> trailingSlash: (boolean)  true 값이 설정되면 경로의 뒤에 슬래시(/)를 붙여서 index.html을 찾습니다. Ex) /me => /me/ => /me.html => /me/index.html<br>
-> skipTrailingSlashRedirect: (boolean) true 값이 설정되면 Next.js의 기본 리다이렉트 기능을 off하고, 미들웨어 내에서 사용자 정의 처리를 할 수 있게 합니다.<br>
+> distDir:  (string) 값이 설정되면 해당 경로로 정적자산(HTML/CSS/JS)이 생성됩니다.<br/>
+> trailingSlash: (boolean)  true 값이 설정되면 경로의 뒤에 슬래시(/)를 붙여서 index.html을 찾습니다. Ex) /me => /me/ => /me.html => /me/index.html<br/>
+> skipTrailingSlashRedirect: (boolean) true 값이 설정되면 Next.js의 기본 리다이렉트 기능을 off하고, 미들웨어 내에서 사용자 정의 처리를 할 수 있게 합니다.<br/>
 
-각 값들의 자세한 설정을 알고싶으시다면 [공식문서](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)를 참조 해주세요.<br>
-
-
-
-<br>
+각 값들의 자세한 설정을 알고싶으시다면 [공식문서](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)를 참조 해주세요.<br/>
 
 
-<br>
-<br>
-<br>
+
+<br/>
+
+
+<br/>
+<br/>
+<br/>
 
 <span id="github-deploy"></span>
 ## **Github Deploy**
 
-위의 과정을 통해 변경한 내용을 커밋합니다. <br>
+위의 과정을 통해 변경한 내용을 커밋합니다. <br/>
 <img width="353" alt="commit" src="https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/7b9b16d6-edee-4a6f-99f4-a7a188569654">
-<br><br>
+<br/><br/>
 
-커밋이 완료되고 난 후, 푸시를 합니다.<br>
+커밋이 완료되고 난 후, 푸시를 합니다.<br/>
 <img width="266" alt="push" src="https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/6569bb2b-4fe6-4a8b-befb-a1a88698f1d0">
-<br><br>
+<br/><br/>
 
 푸시 된 후, Actions 탭을 확인해보면 추가한 변경사항의 메세지에서 action이 발생하고 있습니다.
 ![action](https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/48be170c-8874-41d9-b664-4e9cfa2dee06)
-<br><br>
+<br/><br/>
 
 
-눌러서 자세히 확인을 하면 다음과 같이 build 과정을 진행 중 입니다.<br>
+눌러서 자세히 확인을 하면 다음과 같이 build 과정을 진행 중 입니다.<br/>
 
 ![action-ing](https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/1fa26467-7387-44e6-a011-e68f8b295651)
-<br><br>
+<br/><br/>
 
-목차1의 과정을 거치기 전에는 Build with Next.js 프로세스 중 에러가 발생했지만 <br>
+목차1의 과정을 거치기 전에는 Build with Next.js 프로세스 중 에러가 발생했지만 <br/>
 이제는 에러 없이 build가 완료되었습니다.
 
 ![build](https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/ed4b3633-4d16-4d0c-9184-1b6864cb8631)
 
-<br><br>
+<br/><br/>
 
-또한, deploy과정도 정상적으로 완료되었습니다.<br>
+또한, deploy과정도 정상적으로 완료되었습니다.<br/>
 
 ![deploy](https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/f96335eb-436d-4926-b860-f66b0ade0d31)
 
-<br>
+<br/>
 
-이제 블로그를 들어가서 확인하면 아래와 같이 배포된 것을 확인할 수 있습니다.<br>
+이제 블로그를 들어가서 확인하면 아래와 같이 배포된 것을 확인할 수 있습니다.<br/>
 
 ![main](https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/03632494-9dc4-48c1-b647-4dedaf12ffdd)
 
 
-<br>
-<br>
-<br>
+<br/>
+<br/>
+<br/>
 
 ## 마치면서
 
-오늘의 포스팅은 빌드에러를 해결하는 것으로 마치겠습니다.<br>
-이제 남은 것은, 제일 중요한 과정입니다.<br>
-바로 포스트를 작성하기 위해 필요한 에디터와 디자인 과정입니다.<br>
+오늘의 포스팅은 빌드에러를 해결하는 것으로 마치겠습니다.<br/>
+이제 남은 것은, 제일 중요한 과정입니다.<br/>
+바로 포스트를 작성하기 위해 필요한 에디터와 디자인 과정입니다.<br/>
 다음 포스트에서는 에디터와 디자인에 대해서 다루겠습니다.

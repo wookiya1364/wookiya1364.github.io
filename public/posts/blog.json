@@ -2,20 +2,20 @@
   {
     "id": "brvjspj4y",
     "seq": 0,
-    "title": "Next.js 13 Github Blog 만들기(1)",
+    "title": "Next.js 13, 14 Github Blog 만들기(1)",
     "content": "/posts/2023/10/15.mdx",
-    "description": "Next.js 13으로 Github Blog를 만들기.",
-    "summary": "Next.js 13으로 Github Blog를 만드는 방법입니다. 이 방법은 블로그를 원하는 디자인으로 커스터마이징 할 수 있고, 포스트를 마크다운으로 작성할 수 있습니다.",
+    "description": "Next.js 13, 14로 Github Blog를 만들기.",
+    "summary": "Next.js 13, 14로 Github Blog를 만드는 방법입니다. 이 방법은 블로그를 원하는 디자인으로 커스터마이징 할 수 있고, 포스트를 마크다운으로 작성할 수 있습니다.",
     "thumbnail": "/image/2023/10/06/Nextjs-logo.png",
     "create": "2023년 10월 15일"
   },
   {
     "id": "7c9ll033h",
     "seq": 1,
-    "title": "Next.js 13 Github Blog 만들기(2)",
+    "title": "Next.js 13, 14 Github Blog 만들기(2)",
     "content": "/posts/2023/10/25.mdx",
-    "description": "Next.js 13으로 Github Blog를 만들기.",
-    "summary": "이번 포스팅에서는 Next.js 13으로 Github Blog를 배포할 때, 발생하는 빌드에러를 해결하도록 하겠습니다.",
+    "description": "Next.js 13, 14로 Github Blog를 만들기.",
+    "summary": "이번 포스팅에서는 Next.js 13, 14로 Github Blog를 배포할 때, 발생하는 빌드에러를 해결하도록 하겠습니다.",
     "thumbnail": "/image/2023/10/06/Nextjs-logo.png",
     "create": "2023년 10월 25일"
   }
