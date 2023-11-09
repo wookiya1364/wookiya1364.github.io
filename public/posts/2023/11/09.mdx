@@ -1,0 +1,146 @@
+## 이번 포스팅에서는 Next.js 13, 14로 포스트를 작성할 때 필요한 에디터와 디자인을 적용해보겠습니다.
+
+깃허브 블로그 만들기 시리즈는 총 3부작으로 구성되며,<br/>
+3부에서는 Next.js 13, 14 포스트 작성을 위한 에디터와 디자인을 다룹니다.<br/><br/>
+
+## 들어가기에 앞서...
+
+[1부-Next.js 13, 14 Github Blog 만들기(1)](https://wookiya1364.github.io/post/brvjspj4y)<br/>
+[2부-Next.js 13, 14 Github Blog 만들기(2)](https://wookiya1364.github.io/post/7c9ll033h)<br/>
+[3부-Next.js 13, 14 Github Blog 만들기(3)](https://wookiya1364.github.io/post/i2qqh5tw1)<br/>
+
+<br/><br/><br/>
+
+|3부 목차|설명|
+|---|---|
+|[editor 소개](#editor소개)|CodeMirror editor를 소개합니다.|
+|[editor 설치](#editor설치)|CodeMirror editor를 설치합니다.|
+|[editor 디자인 적용](#editor적용)|CodeMirror editor를 적용합니다.|
+|[editor 편의기능 추가](#editor편의기능추가)|CodeMirror editor에 편의기능을 추가합니다.|
+
+<br/><br/><br/>
+
+<span id="editor소개"></span>
+## **editor 소개** 
+
+[CodeMirror](https://github.com/uiwjs/react-codemirror)는 
+[프로그래머스](https://programmers.co.kr/), [옵시디언(obsidian)](https://obsidian.md/), [코드펜(codepen)](https://codepen.io/) 등
+다양한 곳에서 사용합니다.<br/>
+HTML, 마크다운을 사용할 수 있고, 사용자에게 맞춰서 여러 커스터마이징을 할 수 있는 레퍼런스가 많은 에디터입니다.<br/>
+레퍼런스가 많다는 의미는  안정적이고, 정보를 얻기 쉬우며 좋은 생태계가 구성되어 있을 확률이 높다는 것을 의미합니다.<br/>
+위의 이유로 에디터를 CodeMirror로 선택했습니다.
+<br/>
+<br/>
+<br/>
+
+<span id="editor설치"></span>
+## **editor 설치** 
+
+CodeMirror는 다양한 플러그인이 있습니다. 본 포스팅에서는 7개를 설치하고 사용했습니다.<br/>
+사용한 패키지는 다음과 같습니다.<br/>
+동일하게 사용하시려면 아래의 코드를 복사해서 붙여넣어주세요.
+
+```shell  showLineNumbers
+yarn add -D @codemirror/lang-markdown @codemirror/language-data @uiw/codemirror-extensions-mentions @uiw/codemirror-theme-vscode @uiw/react-codemirror @uiw/react-markdown-editor @uiw/react-markdown-preview
+```
+
+
+
+<br/>
+<br/>
+<br/>
+
+<span id="editor적용"></span>
+## **editor 디자인 적용** 
+
+
+우선 CodeMirror를 적용해보겠습니다.<br/>
+저는 dark테마를 선호하므로, vscodeDark를 적용하겠습니다.<br/>
+
+```jsx showLineNumbers
+import { vscodeDark } from "@uiw/codemirror-theme-vscode";
+
+<CodeMirror
+  theme={vscodeDark}
+/>
+```
+
+vscodeDark테마가 적용되면 아래와 같이 나옵니다.<br/>
+<img width="482" alt="스크린샷 2023-11-09 오전 10 29 40" src="https://github.com/wookiya1364/wookiya1364.github.io/assets/16011536/18dd395a-e51e-4e5e-8974-d44dda47a14e">
+
+<br/>
+
+이제 작성한 글을 미리볼 수 있는 MarkdownPreview를 만들어보겠습니다.<br/>
+그전에 포스트를 마크다운으로 작성할 수 있도록 마크다운 플러그인을 사용하겠습니다.<br/>
+
+<br/>
+
+```jsx showLineNumbers
+import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
+import { languages } from "@codemirror/language-data";
+
+<CodeMirror
+  className="w-full h-[90vh] overflow-auto"
+  theme={vscodeDark}
+  extensions={[
+    markdown({ base: markdownLanguage, codeLanguages: languages }),
+  ]}
+/>
+```
+
+마크다운을 작성할 수 있게 확장패키지를 적용했습니다.<br/>
+하지만 작성된 글이 타이핑 될 때 마다 저장되게 하려면 제어컴포넌트가 되어야 합니다.<br/>
+따라서, CodeMirror의 <span style="color:white; background-color:green; padding: 0px 5px; border-radius:100px;">onChange 이벤트에 useState를 적용합니다.</span><br/>
+updateMarkdown 익명함수에서 localStorage에 저장하는 이유는 글을 작성하는 도중에 브라우저를 종료하더라도<br/>
+이어서 작성할 수 있도록 기존의 내용을 저장하는 것입니다.
+
+```jsx showLineNumbers
+const [markdownContent, setMarkdownContent] = useState("");
+const updateMarkdown = useCallback((textContent: string) => {
+    localStorage.setItem("markdownContent", textContent);
+    setMarkdownContent(textContent);
+  }, []);
+
+<CodeMirror
+  theme={vscodeDark}
+  value={markdownContent}
+  extensions={[
+    markdown({ base: markdownLanguage, codeLanguages: languages }),
+  ]}
+  onChange={updateMarkdown}
+/>
+```
+
+이후에는 미리보기를 할 수 있는 MarkdownPreview 컴포넌트 source에<br/>
+useState의 readOnly값인 markdownContent를 주입합니다.
+
+```jsx showLineNumbers
+<MarkdownPreview
+  source={markdownContent}
+/>
+```
+<br/>
+
+위의 과정을 모두 거치면 마크다운 에디터와 프리뷰가 생성됩니다.
+
+<br/><br/><br/>
+
+<span id="editor편의기능추가"></span>
+## **editor 편의기능 추가**
+
+하지만 이대로 에디터를 사용하기에는 상당히 번거롭습니다.<br/>
+대부분의 블로그에서는 다양한 편의기능들이 있기 때문입니다.<br/>
+따라서, 최소한의 편의기능인 mentions을 추가합니다.
+
+<br/>
+
+mentions은 
+
+<br/><br/><br/>
+
+## 마치면서
+
+오늘의 포스팅은 빌드에러를 해결하는 것으로 마치겠습니다.<br/>
+이제 남은 것은, 제일 중요한 과정입니다.<br/>
+바로 포스트를 작성하기 위해 필요한 에디터와 디자인 과정입니다.<br/>
+다음 포스트에서는 에디터와 디자인에 대해서 다루겠습니다.

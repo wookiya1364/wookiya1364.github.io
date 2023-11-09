@@ -18,5 +18,15 @@
     "summary": "이번 포스팅에서는 Next.js 13, 14로 Github Blog를 배포할 때, 발생하는 빌드에러를 해결하도록 하겠습니다.",
     "thumbnail": "/image/2023/10/06/Nextjs-logo.png",
     "create": "2023년 10월 25일"
+  },
+  {
+    "id": "fk0vb1g6w",
+    "seq": 2,
+    "title": "Next.js 13, 14 Github Blog 만들기(3)",
+    "content": "/posts/2023/11/09.mdx",
+    "description": "우기's Journal 포스트 입니다.",
+    "summary": "이번 포스팅에서는 Next.js 13, 14로 포스트를 작성할 때 필요한 에디터와 디자인을 적용해보겠습니다.",
+    "thumbnail": "/image/2023/10/06/Nextjs-logo.png",
+    "create": "2023년 11월 09일"
   }
 ]
