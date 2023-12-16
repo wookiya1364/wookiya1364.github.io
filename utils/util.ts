@@ -38,6 +38,15 @@ const shareFacebook = (text: string, url: string) => {
   window.open(`http://www.facebook.com/sharer/sharer.php?u=${url}`);
 };
 
+const validateEmptyKeys = (obj: KeyValue) => {
+  for (let key in obj) {
+    if (obj[key] === undefined || obj[key] === null || obj[key] === "") {
+      return false;
+    }
+  }
+  return true;
+};
+
 const getDate = () => `${new Date().toISOString().split("T")[0]}`;
 
 const HOST =
@@ -62,7 +71,8 @@ async function getPost(param: any) {
   const blog: TBlog[] = await getBlog();
   const targetPost = blog.find((item) => item.seq == "0");
   const segment =
-    param?.props?.childProp?.segment?.split("?")[1] || JSON.stringify(targetPost);
+    param?.props?.childProp?.segment?.split("?")[1] ||
+    JSON.stringify(targetPost);
   const childID = JSON.parse(segment);
   const post = pipe(findID(childID))(blog) as TBlog;
   const content = await fetch(`${HOST}${post.content}`, {
@@ -89,6 +99,7 @@ export {
   toastSuccess,
   shareTwitter,
   shareFacebook,
+  validateEmptyKeys,
   getBlog,
   getPost,
   // getAllPost,

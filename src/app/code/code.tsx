@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Row } from "@atom/row";
 import { Column } from "@atom/column";
 import useClipBoard from "@utils/useClipboard";
@@ -11,6 +11,7 @@ import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
 import { languages } from "@codemirror/language-data";
 import { mentions } from "@uiw/codemirror-extensions-mentions";
 import PostDescript from "./descript";
+import { macroMention } from "../constants/macros";
 
 type TRehypeRewriteNode = {
   type: string;
@@ -22,61 +23,6 @@ type TRehypeRewriteNode = {
 export default function Code() {
   const [markdownContent, setMarkdownContent] = useState("");
   const [isCopy, setCopy] = useClipBoard();
-
-  const macroMention = useMemo(
-    () => [
-      {
-        displayLabel: "개행",
-        label: `@개행`,
-        apply: `<br/>`,
-      },
-      {
-        displayLabel: "문단 전환",
-        label: `@문단전환`,
-        apply: `<br/><br/><br/>`,
-      },
-      {
-        displayLabel: "목차",
-        label: `@목차`,
-        apply: `[목차](#id)
-# id`,
-      },
-      {
-        displayLabel: "목차ID",
-        label: "@목차ID",
-        apply: `<span id=""></span>`,
-      },
-      {
-        displayLabel: "컬러강조",
-        label: "@컬러강조",
-        apply: `<span style="color:white; background-color:green; padding: 0px 5px; border-radius:100px;"></span>`,
-      },
-      {
-        displayLabel: "코드주석",
-        label: `@코드주석`,
-        apply: `\`\`\`jsx showLineNumbers
-\`\`\``,
-      },
-      {
-        displayLabel: "테이블",
-        label: "@테이블",
-        apply: `|||
-|---|---|
-|||`,
-      },
-      {
-        displayLabel: "링크",
-        label: "@링크",
-        apply: `[](url)`,
-      },
-      {
-        displayLabel: "인용 또는 notice",
-        label: "@인용",
-        apply: `>`,
-      },
-    ],
-    []
-  );
 
   const updateMarkdown = useCallback((textContent: string) => {
     localStorage.setItem("markdownContent", textContent);
@@ -115,8 +61,9 @@ export default function Code() {
             onChange={updateMarkdown}
           />
         </Column>
+        <Row className="w-[3%]"></Row>
         <MarkdownPreview
-          className="w-1/2 h-[inherit] overflow-auto"
+          className="w-[47%] h-[inherit] overflow-auto"
           source={markdownContent}
           rehypeRewrite={(node, index, parent) => {
             const rehypeNode = node as TRehypeRewriteNode;

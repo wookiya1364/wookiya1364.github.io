@@ -5,6 +5,7 @@ import { Column } from "@atom/column";
 import { FieldSet } from "@atom/field";
 import { Row } from "@atom/row";
 import { Textarea } from "@atom/textarea";
+import { validateEmptyKeys } from "@utils/util";
 import { useCallback, useEffect, useRef } from "react";
 
 const writePost = async (
@@ -72,7 +73,12 @@ export default function PostDescript() {
               description: descriptionRef.current?.value!,
               thumbnail: thumbnailRef.current?.value!,
             };
-            await writePost(param);
+            const isValid = validateEmptyKeys(param);
+            if (isValid) {
+              await writePost(param);
+            } else {
+              alert("빈칸을 모두 채워주세요.");
+            }
           }}
         >
           등록

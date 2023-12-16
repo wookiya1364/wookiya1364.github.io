@@ -1,3 +1,7 @@
+type KeyValue = {
+  [key: string]: string | number | boolean | null | undefined;
+};
+
 type TDefaultProps = {
   className?: string;
   children?: React.ReactNode;
